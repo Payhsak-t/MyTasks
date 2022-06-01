@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import Card from './UI/Card';
+import PropTypes from 'prop-types';
+import { FaTimes } from 'react-icons/fa';
 
-function NoteTaker() {
-  const [priority, setPriority] = useState(7);
-  const [task, setTask] = useState('This is an example task');
-
+function NoteTaker({ item, deleteNote }) {
   return (
-    <div className="card">
-      <div className="num-display">{priority}</div>
-      <div className="text-display">{task}</div>
-    </div>
+    <Card reverse={false}>
+      <div className="num-display">{item.priority}</div>
+      <button onClick={() => deleteNote(item.id)} className="close">
+        <FaTimes color="red" />
+      </button>
+      <div className="text-display">{item.text}</div>
+    </Card>
   );
 }
+
+NoteTaker.propTypes = {
+  item: PropTypes.object.isRequired,
+};
 
 export default NoteTaker;
